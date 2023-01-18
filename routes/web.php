@@ -3,7 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+route::get('/',[HomeController::class,'index']);
 
 //frontend route
 //Route::get('/', 'FrontendController@index');
@@ -57,3 +55,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Route::get('/admin/products/comments', [AdminController::class, 'adminGetAllComments'])->name('admin.comment.index');
 //Route::delete('/admin/products/delete/{id}', [AdminController::class, 'adminDeleteProduct'])->name('admin.product.delete');
 //Route::delete('/admin/products/comments/{id}', [AdminController::class, 'adminDeleteComment'])->name('admin.comment.delete');
+
+route::get('/redirect',[HomeController::class,'redirect']);
