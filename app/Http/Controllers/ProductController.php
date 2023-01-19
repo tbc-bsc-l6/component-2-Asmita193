@@ -17,13 +17,26 @@ class ProductController extends Controller
 
 
 
-    public function index()
+    public function index(Request $request)
     {
+        //Search
+
+
+        $search = $request['search']?? "";
+        if ($search != ""){
+            $product = Product::where('title', 'LIKE', "%$search%")->orWhere('id', 'LIKE', "%$search%")->get();
+        }else{
+            $product = Product::all();
+        }
+       // $product = compact('product', 'search');
+        return view('product.index',compact('product', 'search'));
+
+
         // return all products
 
-        $products =  $this->product->getAllProducts();
+        // $product =  $this->product->getAllProducts();
 
-        return view('product.index')->with('products', $products);
+        // return view('product.index')->with('products', $products);
 
     }
 
@@ -61,7 +74,7 @@ class ProductController extends Controller
 
         if($image = $request->file('picture')) {
             $name = time(). '.' .$image->getClientOriginalName();
-            $image->move(public_path('images'), $name);
+            $image->move(public_path('img'), $name);
             $data['picture'] = "$name";
         }
 
@@ -99,7 +112,7 @@ class ProductController extends Controller
 
         if($image = $request->file('picture')) {
             $name = time(). '.' .$image->getClientOriginalName();
-            $image->move(public_path('images'), $name);
+            $image->move(public_path('img'), $name);
             $data['picture'] = "$name";
         }
 
@@ -107,24 +120,5 @@ class ProductController extends Controller
 
         return redirect('/products');
 
-    }
-
-    //search 
-    public function search(Request $request)
-    {
-        $projects= products::where([
-            ['title', '!=', Null], 
-            [function ($query) use ($request) {
-                if (($term = $request->term)) {
-                    $query->orWhere('name', 'LIKE', '%' . $term . '%')->get();
-
-                }
-            } ]
-        ])
-        ->orderBy("id", "title")
-        ->paginate(10);
-
-        return view('product.index', compact('product'))
-        ->with('i', (request()->input('page', 1) -1)*5);
     }
 }

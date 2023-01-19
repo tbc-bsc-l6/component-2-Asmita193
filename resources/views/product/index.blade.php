@@ -6,11 +6,20 @@
 <hr>
 <br>
 
-<?php //delete from here if search doesnt work ?>
+ <?php //delete from here if search doesnt work ?>
 <div>
         <div class="searchBar">
             <div class="">
-                <form action="{{ route('product.index') }}" method="GET" role="search">
+            <form action="">
+    <div class="form-group">
+      <input type="search" label="Search" name="search" id="" class="form-control" placeholder="Search by Title">
+    </div>
+    <br>
+    <button class="btn btn-primary">Search</button>
+  </form>
+                
+
+               <!-- <form action="{{ route('product.index') }}" method="GET" role="search">
 
                     <div class="input-group">
                         <span class="input-group-btn mr-5 mt-1">
@@ -27,7 +36,7 @@
                             </span>
                         </a>
                     </div>
-                </form>
+                </form> -->
             </div>
         </div>
     </div>
@@ -35,17 +44,26 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6" style="display:flex">
-            @foreach ($products as $product)
-            <div class="card m-2 p-2" style="width: 18rem;">
-                <img src="images/{{ $product->picture }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">{{ $product->title }}</h5>
-                  <h5 class="card-title">Price: ${{ $product->price }}</h5>
-                  <hr>
-                  <p class="card-text">{{ $product->description}} </p>
-                  <a href="{{ route('product.show', $product->id) }}" class="btn btn-primary">View Detail</a>
+            @foreach ($product as $products)
+            <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="img/{{ $products->picture }}" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{ $products->title }}</h5>
+                                <!-- Product price-->
+                                Price: ${{ $products->price }}
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a href="{{ route('product.show', $products->id) }}" class="btn btn-outline-dark mt-auto" href="#">View Detail</a></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             @endforeach
         </div>
     </div>

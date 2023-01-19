@@ -48,6 +48,7 @@
                         </div>
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    
                 </div>
             </div>
         </nav>
@@ -209,18 +210,21 @@
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <h1 class="mb-5">Hot Coffee</h1>
+                @foreach($products as $product)
+                    <h1 class="mb-5">{{$product->title}}</h1>
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
                             <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-1.jpg" alt="">
-                            <h5 class="menu-price">$5</h5>
+                            <h5 class="menu-price">${{$product->price}}</h5>
                         </div>
+                        
+                        
                         <div class="col-8 col-sm-9">
                             <h4>Black Coffee</h4>
                             <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
                         </div>
                     </div>
-                    <div class="row align-items-center mb-5">
+                   <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
                             <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-2.jpg" alt="">
                             <h5 class="menu-price">$7</h5>
@@ -241,7 +245,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                @endforeach
+               <!--  <div class="col-lg-6">
                     <h1 class="mb-5">Cold Coffee</h1>
                     <div class="row align-items-center mb-5">
                         <div class="col-4 col-sm-3">
@@ -277,7 +282,9 @@
             </div>
         </div>
     </div>
+-->
     <!-- Menu End -->
+
 
 
     <!-- Reservation Start -->
